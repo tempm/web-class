@@ -9,10 +9,26 @@
 namespace ce\views;
 
 
+use ce\models\Post;
 use ce\models\User;
 
 class Common
 {
+    public static function init()
+    {
+        global $app,$em;
+        if (!is_null(User::getUser('admin'))) {
+            $app->pass();
+        }
+        $user = new User();
+        $user->setMail('');
+        $user->setUsername('admin');
+        $user->setPassword('123');
+        $user->setType(User::TYPE_ADMIN);
+        $em->persist($user);
+        $em->flush();
+    }
+
     public static function index()
     {
         global $app;
@@ -41,12 +57,18 @@ class Common
     {
         global $app;
         User::logout();
-        $app->redirect(ROOT_URL.'/');
+        $app->redirect(ROOT_URL . '/');
     }
 
     public static function test()
     {
-        $user = User::authentication();
-        var_dump($user);
+//        global $em;
+//        $user = User::getUser('admin');
+//        $post = new Post();
+//        $post->setText('<h1>Ha Ha Ha</h1>');
+//        $post->setTime(new \DateTime());
+//        $post->setUser($user);
+//        $em->persist($post);
+//        $em->flush();
     }
 } 

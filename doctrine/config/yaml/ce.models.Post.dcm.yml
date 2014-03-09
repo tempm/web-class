@@ -1,0 +1,20 @@
+ce\models\Post:
+  type: entity
+  table: posts
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: AUTO
+  fields:
+    text:
+      type: text
+    time:
+      type: datetime
+  manyToOne:
+    user:
+      targetEntity: ce\models\User
+      inversedBy: posts
+      joinColumn:
+        name: user_id
+        referencedColumnName: id

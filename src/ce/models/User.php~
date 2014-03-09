@@ -194,49 +194,4 @@ class User
     }
 
 
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $posts;
-
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->posts = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    /**
-     * Add posts
-     *
-     * @param \ce\models\Post $posts
-     * @return User
-     */
-    public function addPost(\ce\models\Post $posts)
-    {
-        $this->posts[] = $posts;
-
-        return $this;
-    }
-
-    /**
-     * Remove posts
-     *
-     * @param \ce\models\Post $posts
-     */
-    public function removePost(\ce\models\Post $posts)
-    {
-        $this->posts->removeElement($posts);
-    }
-
-    /**
-     * Get posts
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getPosts()
-    {
-        return $this->posts;
-    }
 }

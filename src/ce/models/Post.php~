@@ -80,32 +80,4 @@ class Post
     {
         return $this->time;
     }
-    /**
-     * @var \ce\models\User
-     */
-    private $user;
-
-
-    /**
-     * Set user
-     *
-     * @param \ce\models\User $user
-     * @return Post
-     */
-    public function setUser(\ce\models\User $user = null)
-    {
-        $this->user = $user;
-
-        return $this;
-    }
-
-    /**
-     * Get user
-     *
-     * @return \ce\models\User 
-     */
-    public function getUser()
-    {
-        return $this->user;
-    }
 }

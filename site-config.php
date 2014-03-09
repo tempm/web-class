@@ -7,3 +7,7 @@
  */
 
 define('DEV_MODE', true);
+$conn = array(
+    'driver' => 'pdo_sqlite',
+    'path' => __DIR__ . '/private/db/db.sqlite',
+);

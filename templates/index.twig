@@ -3,16 +3,7 @@
     <div class="row">
         <div class="col-md-4">
             {% if _user is null %}
-                <div class="panel panel-primary">
-                    <div class="panel-heading">login</div>
-                    <div class="panel-body">
-                        <form action="{{ ROOT_URL }}/login/" method="post">
-                            <input class="form-control" type="text" name="username" placeholder="username">
-                            <input class="form-control" type="password" name="password" placeholder="password">
-                            <button class="btn btn-primary btn-lg btn-block">login</button>
-                        </form>
-                    </div>
-                </div>
+                {% include 'widget/login.twig' %}
             {% else %}
                 <div class="panel panel-primary">
                     <div class="panel-heading">login</div>
@@ -25,12 +16,12 @@
                 </div>
             {% endif %}
         </div>
-        <div class="col-md-4
-        ">
+        <div class="col-md-4">
             <ul class="list-group">
                 {% if _user is not null %}
                     {% for post in _user.getPosts() %}
-                        <li class="list-group-item"><span class="text-primary">@{{ post.getUser().username }}</span> {{ post.text }}</li>
+                        <li class="list-group-item"><span
+                                    class="text-primary">@{{ post.getUser().username }}</span> {{ post.text }}</li>
                     {% endfor %}
                 {% endif %}
             </ul>
