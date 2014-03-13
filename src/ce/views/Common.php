@@ -11,6 +11,7 @@ namespace ce\views;
 
 use ce\models\Post;
 use ce\models\User;
+use ce\utils\Message;
 
 class Common
 {
@@ -39,24 +40,23 @@ class Common
         global $app;
         $user = User::authentication();
         if (!is_null($user)) {
-            $app->redirect(ROOT_URL . '/');
+            Message::redirect('index');
         }
         $username = $app->request()->post('username');
         $password = $app->request()->post('password');
         $user = User::checkPassword($username, $password);
         if (is_null($user)) {
-            // TODO error
-            $app->redirect(ROOT_URL . '/');
+            Message::addMessage('Invalid user name', Message::ERROR);
+            Message::redirect('index');
         }
         User::login($user);
-        $app->redirect(ROOT_URL . '/');
+        Message::redirect('index');
     }
 
     public static function logout_post()
     {
-        global $app;
         User::logout();
-        $app->redirect(ROOT_URL . '/');
+        Message::redirect('index');
     }
 
     public static function test()
