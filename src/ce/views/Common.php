@@ -16,7 +16,7 @@ class Common
 {
     public static function init()
     {
-        global $app,$em;
+        global $app;
         if (!is_null(User::getUser('admin'))) {
             $app->pass();
         }
@@ -25,8 +25,7 @@ class Common
         $user->setUsername('admin');
         $user->setPassword('123');
         $user->setType(User::TYPE_ADMIN);
-        $em->persist($user);
-        $em->flush();
+        $user->persist($user);
     }
 
     public static function index()
@@ -62,7 +61,6 @@ class Common
 
     public static function test()
     {
-//        global $em;
 //        $user = User::getUser('admin');
 //        $post = new Post();
 //        $post->setText('<h1>Ha Ha Ha</h1>');

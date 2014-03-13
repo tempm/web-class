@@ -17,14 +17,14 @@
             {% endif %}
         </div>
         <div class="col-md-4">
-            <ul class="list-group">
-                {% if _user is not null %}
+            {% if _user is not null %}
+                <ul class="list-group">
                     {% for post in _user.getPosts() %}
                         <li class="list-group-item"><span
                                     class="text-primary">@{{ post.getUser().username }}</span> {{ post.text }}</li>
                     {% endfor %}
-                {% endif %}
-            </ul>
+                </ul>
+            {% endif %}
         </div>
     </div>
 {% endblock %}

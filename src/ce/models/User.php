@@ -8,8 +8,13 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * User
  */
-class User
+class User extends Model
 {
+    static function getEntityName()
+    {
+        return 'ce\models\User';
+    }
+
     const TYPE_ADMIN = 'admin';
 
     /**
@@ -137,16 +142,6 @@ class User
     public function getType()
     {
         return $this->type;
-    }
-
-
-    /**
-     * @return \Doctrine\ORM\EntityRepository
-     */
-    public static function getRepository()
-    {
-        global $em;
-        return $em->getRepository('ce\models\User');
     }
 
     /**

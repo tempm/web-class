@@ -7,8 +7,14 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Post
  */
-class Post
+class Post extends Model
 {
+
+    static function getEntityName()
+    {
+        return 'ce\models\Post';
+    }
+
     /**
      * @var integer
      */
@@ -28,7 +34,7 @@ class Post
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -51,7 +57,7 @@ class Post
     /**
      * Get text
      *
-     * @return string 
+     * @return string
      */
     public function getText()
     {
@@ -74,12 +80,13 @@ class Post
     /**
      * Get time
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getTime()
     {
         return $this->time;
     }
+
     /**
      * @var \ce\models\User
      */
@@ -102,10 +109,11 @@ class Post
     /**
      * Get user
      *
-     * @return \ce\models\User 
+     * @return \ce\models\User
      */
     public function getUser()
     {
         return $this->user;
     }
+
 }
