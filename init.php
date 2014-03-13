@@ -28,8 +28,7 @@ $app->config('debug', DEV_MODE);
 $app->config('cookies.httponly', true);
 
 // $app->add(new \cert\util\Csrf()); // TODO create csrf
-//  $app->hook('slim.after', 'cert\util\Message::clearMessage'); // TODO coming soon
-
+$app->hook('slim.after', 'cert\util\Message::clearMessage');
 
 /********************************************/
 /*                   urls                   */
