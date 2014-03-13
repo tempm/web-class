@@ -17,9 +17,8 @@ class Common
 {
     public static function init()
     {
-        global $app;
         if (!is_null(User::getUser('admin'))) {
-            $app->pass();
+            Message::pass();
         }
         $user = new User();
         $user->setMail('');
@@ -31,8 +30,7 @@ class Common
 
     public static function index()
     {
-        global $app;
-        $app->render('index.twig');
+        Message::render('index.twig');
     }
 
     public static function login_post()
