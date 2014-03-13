@@ -7,7 +7,7 @@
  * To change this template use File | Settings | File Templates.
  */
 
-namespace ce\utils;
+namespace ce\util;
 
 
 class Authenticate

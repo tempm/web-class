@@ -2,7 +2,7 @@
 
 namespace ce\models;
 
-use ce\utils\Authenticate;
+use ce\util\Authenticate;
 use Doctrine\ORM\Mapping as ORM;
 
 /**

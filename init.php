@@ -71,8 +71,6 @@ if (DEV_MODE) {
     $env->disableDebug();
 }
 
-// $env->addGlobal('_user', \cert\models\User::authenticate()); // TODO when create user
-
 $env->addGlobal('_user', User::authentication());
 
 $env->addGlobal('ROOT_URL', ROOT_URL);

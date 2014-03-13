@@ -11,14 +11,15 @@ namespace ce\views;
 
 use ce\models\Post;
 use ce\models\User;
-use ce\utils\Message;
+use ce\util\App;
+use ce\util\Message;
 
 class Common
 {
     public static function init()
     {
         if (!is_null(User::getUser('admin'))) {
-            Message::pass();
+            App::pass();
         }
         $user = new User();
         $user->setMail('');
@@ -30,7 +31,7 @@ class Common
 
     public static function index()
     {
-        Message::render('index.twig');
+        App::render('index.twig');
     }
 
     public static function login_post()
@@ -38,23 +39,23 @@ class Common
         global $app;
         $user = User::authentication();
         if (!is_null($user)) {
-            Message::redirect('index');
+            App::redirect('index');
         }
         $username = $app->request()->post('username');
         $password = $app->request()->post('password');
         $user = User::checkPassword($username, $password);
         if (is_null($user)) {
             Message::addMessage('Invalid user name', Message::ERROR);
-            Message::redirect('index');
+            App::redirect('index');
         }
         User::login($user);
-        Message::redirect('index');
+        App::redirect('index');
     }
 
     public static function logout_post()
     {
         User::logout();
-        Message::redirect('index');
+        App::redirect('index');
     }
 
     public static function test()
