@@ -27,7 +27,7 @@ $app = new \Slim\Slim(array(
 $app->config('debug', DEV_MODE);
 $app->config('cookies.httponly', true);
 
-// $app->add(new \ce\util\Csrf()); // TODO create csrf
+$app->add(new \ce\util\Csrf());
 $app->hook('slim.after', 'ce\util\Message::clearMessage');
 
 /********************************************/

@@ -10,6 +10,7 @@
                     <div class="panel-body">
                         Hi {{ _user.username|upper }}
                         <form action="{{ urlFor('logout-post') }}" method="post">
+                            {% include 'util/csrf.twig' %}
                             <button class="btn btn-link">logout</button>
                         </form>
                     </div>
