@@ -6,12 +6,17 @@
                 {% include 'widget/login.twig' %}
             {% else %}
                 <div class="panel panel-primary">
-                    <div class="panel-heading">login</div>
+                    <div class="panel-heading">Post</div>
                     <div class="panel-body">
                         Hi {{ _user.username|upper }}
+                        <form action="{{ urlFor('post-post') }}" method="post">
+                            <textarea class="form-control" name="text"></textarea>
+                            {% include 'util/csrf.twig' %}
+                            <button class="btn bg-primary btn-block btn-lg" type="submit">Post</button>
+                        </form>
                         <form action="{{ urlFor('logout-post') }}" method="post">
                             {% include 'util/csrf.twig' %}
-                            <button class="btn btn-link">logout</button>
+                            <button class="btn btn-default">logout</button>
                         </form>
                     </div>
                 </div>

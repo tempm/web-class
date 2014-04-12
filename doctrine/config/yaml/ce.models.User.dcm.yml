@@ -19,3 +19,18 @@ ce\models\User:
     posts:
       targetEntity: ce\models\Post
       mappedBy: user
+  manyToMany:
+    friendsWithMe:
+      targetEntity: ce\models\User
+      mappedBy: myFriends
+    myFriends:
+      targetEntity: ce\models\User
+      inversedBy: friendsWithMe
+      joinTable:
+        name: friends
+        joinColumns:
+          user_id:
+            referencedColumnName: id
+        inverseJoinColumns:
+          friend_user_id:
+            referencedColumnName: id

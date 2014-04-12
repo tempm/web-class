@@ -168,6 +168,9 @@ class User extends Model
         return $user;
     }
 
+    /**
+     * @return null|User
+     */
     public static function authentication()
     {
         if (isset($_SESSION['user.id'])) {
@@ -233,5 +236,81 @@ class User extends Model
     public function getPosts()
     {
         return $this->posts;
+    }
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $friendsWithMe;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $myFriends;
+
+
+    /**
+     * Add friendsWithMe
+     *
+     * @param \ce\models\User $friendsWithMe
+     * @return User
+     */
+    public function addFriendsWithMe(\ce\models\User $friendsWithMe)
+    {
+        $this->friendsWithMe[] = $friendsWithMe;
+
+        return $this;
+    }
+
+    /**
+     * Remove friendsWithMe
+     *
+     * @param \ce\models\User $friendsWithMe
+     */
+    public function removeFriendsWithMe(\ce\models\User $friendsWithMe)
+    {
+        $this->friendsWithMe->removeElement($friendsWithMe);
+    }
+
+    /**
+     * Get friendsWithMe
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getFriendsWithMe()
+    {
+        return $this->friendsWithMe;
+    }
+
+    /**
+     * Add myFriends
+     *
+     * @param \ce\models\User $myFriends
+     * @return User
+     */
+    public function addMyFriend(\ce\models\User $myFriends)
+    {
+        $this->myFriends[] = $myFriends;
+
+        return $this;
+    }
+
+    /**
+     * Remove myFriends
+     *
+     * @param \ce\models\User $myFriends
+     */
+    public function removeMyFriend(\ce\models\User $myFriends)
+    {
+        $this->myFriends->removeElement($myFriends);
+    }
+
+    /**
+     * Get myFriends
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getMyFriends()
+    {
+        return $this->myFriends;
     }
 }
