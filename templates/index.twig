@@ -9,7 +9,7 @@
                     <div class="panel-heading">Post</div>
                     <div class="panel-body">
                         Hi {{ _user.username|upper }}
-                        <form action="{{ urlFor('post-post') }}" method="post">
+                        <form action="{{ urlFor('post-post') }}" method="post" id="post-form">
                             <textarea class="form-control" name="text"></textarea>
                             {% include 'util/csrf.twig' %}
                             <button class="btn bg-primary btn-block btn-lg" type="submit">Post</button>
@@ -24,7 +24,7 @@
         </div>
         <div class="col-md-4">
             {% if _user is not null %}
-                <ul class="list-group">
+                <ul class="list-group" id="posts-list">
                     {% for post in _user.getPosts() %}
                         <li class="list-group-item"><span
                                     class="text-primary">@{{ post.getUser().username }}</span> {{ post.text }}</li>
@@ -33,4 +33,35 @@
             {% endif %}
         </div>
     </div>
+{% endblock %}
+{% block script %}
+    {% if _user is not null %}
+        <script>
+            $('#post-form').on('submit', function (e) {
+                e.preventDefault();
+                var $this = $(this);
+                var text = $this.find('[name=text]').val();
+                var csrf = $this.find('[name=csrf_token]').val();
+                var url = $this.prop('action');
+                $.ajax({
+                    method: 'post',
+                    url: url,
+                    data: {
+                        text: text,
+                        csrf_token: csrf
+                    },
+                    success: function (data) {
+                        $this.find('[name=text]').val('');
+                        if(data.ok){
+                            var ul = $('#posts-list');
+                            var li = $('<li></li>').addClass('list-group-item').text(' '+data.post.text).appendTo(ul);
+                            $('<span></span>').addClass('text-primary').text(data.post.user).prependTo(li);
+                        }
+                        console.log(data);
+                    }
+                });
+                return false;
+            });
+        </script>
+    {% endif %}
 {% endblock %}

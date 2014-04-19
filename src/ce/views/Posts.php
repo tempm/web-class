@@ -20,18 +20,25 @@ class Posts
     {
         global $app;
         $user = User::authentication();
-        if(is_null($user)){
+        if (is_null($user)) {
             App::redirect('index');
         }
         $post = new Post();
         $text = $app->request()->post('text');
-        if(is_null($text)){
+        if (is_null($text)) {
             $text = '';
         }
         $post->setUser($user);
         $post->setText($text);
         $post->setTime(new \DateTime());
         $post->persist();
-        App::redirect('index');
+        if (App::isAjax()) {
+            App::render(null, array('ok' => true,'post'=>array(
+                'text'=>$text,
+                'user'=>$user->getUsername()
+            )));
+        } else {
+            App::redirect('index');
+        }
     }
 }
